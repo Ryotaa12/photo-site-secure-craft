@@ -29,12 +29,16 @@ const Navbar = () => {
         </nav>
         
         <div className="hidden md:flex gap-3">
-          <Button variant="outline" className="border-[#00e5b0] text-[#00e5b0] hover:bg-[#00e5b0] hover:text-[#070b17]">
-            Login
-          </Button>
-          <Button className="bg-[#00e5b0] text-[#070b17] hover:bg-[#00e5b0]/90">
-            Get Started
-          </Button>
+          <Link to="/login">
+            <Button variant="outline" className="border-[#00e5b0] text-[#00e5b0] hover:bg-[#00e5b0] hover:text-[#070b17]">
+              Login
+            </Button>
+          </Link>
+          <Link to="/signup">
+            <Button className="bg-[#00e5b0] text-[#070b17] hover:bg-[#00e5b0]/90">
+              Get Started
+            </Button>
+          </Link>
         </div>
         
         {/* Mobile menu button */}
@@ -81,12 +85,16 @@ const Navbar = () => {
               </Link>
             </nav>
             <div className="flex flex-col space-y-2">
-              <Button variant="outline" className="border-[#00e5b0] text-[#00e5b0] hover:bg-[#00e5b0] hover:text-[#070b17] w-full">
-                Login
-              </Button>
-              <Button className="bg-[#00e5b0] text-[#070b17] hover:bg-[#00e5b0]/90 w-full">
-                Get Started
-              </Button>
+              <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
+                <Button variant="outline" className="border-[#00e5b0] text-[#00e5b0] hover:bg-[#00e5b0] hover:text-[#070b17] w-full">
+                  Login
+                </Button>
+              </Link>
+              <Link to="/signup" onClick={() => setMobileMenuOpen(false)}>
+                <Button className="bg-[#00e5b0] text-[#070b17] hover:bg-[#00e5b0]/90 w-full">
+                  Get Started
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

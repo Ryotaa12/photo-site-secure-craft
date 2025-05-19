@@ -1,0 +1,152 @@
+
+import React from 'react';
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { UserPlus } from "lucide-react";
+import Navbar from "@/components/Navbar";
+
+const formSchema = z.object({
+  fullName: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+  confirmPassword: z.string()
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"]
+});
+
+const Signup = () => {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      password: "",
+      confirmPassword: ""
+    }
+  });
+
+  function onSubmit(data: z.infer<typeof formSchema>) {
+    console.log(data);
+    // Add signup logic here
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col bg-[#070b17]">
+      <Navbar />
+      
+      <main className="flex-grow flex items-center justify-center px-4 py-12">
+        <Card className="w-full max-w-md border-[#1a2436] bg-[#0c1524]">
+          <CardHeader className="space-y-6 text-center">
+            <div className="mx-auto bg-[#070b17] p-3 rounded-full w-16 h-16 flex items-center justify-center">
+              <UserPlus className="text-[#00e5b0] w-8 h-8" />
+            </div>
+            <CardTitle className="text-2xl font-bold text-white">Create an account</CardTitle>
+            <CardDescription className="text-gray-400">
+              Enter your information to get started with PrimeLinks
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="fullName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">Full Name</FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder="John Doe" 
+                          {...field} 
+                          className="bg-[#1a2436] border-[#2a3446] text-white"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">Email</FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder="email@example.com" 
+                          {...field} 
+                          className="bg-[#1a2436] border-[#2a3446] text-white"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">Password</FormLabel>
+                      <FormControl>
+                        <Input 
+                          type="password" 
+                          placeholder="••••••••" 
+                          {...field} 
+                          className="bg-[#1a2436] border-[#2a3446] text-white"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="confirmPassword"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">Confirm Password</FormLabel>
+                      <FormControl>
+                        <Input 
+                          type="password" 
+                          placeholder="••••••••" 
+                          {...field} 
+                          className="bg-[#1a2436] border-[#2a3446] text-white"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <Button type="submit" className="w-full bg-[#00e5b0] text-[#070b17] hover:bg-[#00e5b0]/90 mt-2">
+                  Create Account
+                </Button>
+              </form>
+            </Form>
+          </CardContent>
+          <CardFooter className="flex justify-center border-t border-[#1a2436] pt-4">
+            <p className="text-gray-400 text-sm">
+              Already have an account?{" "}
+              <Link to="/login" className="text-[#00e5b0] hover:underline font-medium">
+                Sign in
+              </Link>
+            </p>
+          </CardFooter>
+        </Card>
+      </main>
+    </div>
+  );
+};
+
+export default Signup;
