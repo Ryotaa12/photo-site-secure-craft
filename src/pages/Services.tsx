@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
-import { Shield, Wifi, Server, ShieldCheck, GlobeLock, Link, ShieldLock } from "lucide-react";
+import { Shield, Wifi, Server, ShieldCheck, GlobeLock, Link } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link as RouterLink } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -131,7 +131,7 @@ const Services = () => {
             <Card>
               <CardContent className="pt-6">
                 <div className="mb-4 bg-[#070b17] p-3 rounded-full w-12 h-12 flex items-center justify-center">
-                  <ShieldLock className="text-[#00e5b0]" />
+                  <Shield className="text-[#00e5b0]" />
                 </div>
                 <h3 className="text-xl font-bold mb-2">Data Loss Prevention</h3>
                 <p className="text-gray-600 mb-4">Protect sensitive information from unauthorized access or leaks.</p>
